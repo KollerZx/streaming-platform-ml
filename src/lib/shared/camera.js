@@ -24,10 +24,10 @@ export default class Camera{
 
     // debug reasons
 
-    camera.video.height = 240
+   /*  camera.video.height = 240
     camera.video.width = 320
 
-    document.body.append(camera.video)
+    document.body.append(camera.video) */
     
     await new Promise(resolve => {
       camera.video.onloadeddata = () => {
