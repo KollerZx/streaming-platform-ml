@@ -1,9 +1,9 @@
-export default class Camera{
-  constructor(){
+export default class Camera {
+  constructor() {
     this.video = document.createElement('video')
   }
-  static async init(){
-    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
+  static async init() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
       throw new Error(`Browser API navigator.mediaDevices.getUserMedia not available`)
     }
 
@@ -24,17 +24,17 @@ export default class Camera{
 
     // debug reasons
 
-   /*  camera.video.height = 240
-    camera.video.width = 320
+    /*  camera.video.height = 240
+     camera.video.width = 320
+ 
+     document.body.append(camera.video) */
 
-    document.body.append(camera.video) */
-    
     await new Promise(resolve => {
       camera.video.onloadeddata = () => {
         resolve(camera.video)
       }
     })
-    
+
     camera.video.play()
 
     return camera
