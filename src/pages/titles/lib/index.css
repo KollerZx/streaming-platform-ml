@@ -1186,3 +1186,16 @@ a {
         padding: 0px 10px;
     }
 }
+
+#hands {
+    /* width: 100vw; */
+    /* height: 100vh; */
+    /* faz com que elementos possam ser clicaveis */
+    pointer-events: none;
+
+    /* faz ficar em cima dos elementos */
+    position: fixed;
+
+    /* fica à frente dos elementos */
+    z-index: 2;
+}

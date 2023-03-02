@@ -4,7 +4,7 @@ const ScrollDownGesture = new GestureDescription('scroll-down'); // ✊️
 const ScrollUpGesture = new GestureDescription('scroll-up'); // 🖐
 
 
-// Rock
+// Scroll-down
 // -----------------------------------------------------------------------------
 
 // thumb: half curled
@@ -18,7 +18,7 @@ for (let finger of [Finger.Index, Finger.Middle, Finger.Ring, Finger.Pinky]) {
   ScrollDownGesture.addCurl(finger, FingerCurl.HalfCurl, 0.9);
 }
 
-// Paper
+// Scroll-up
 // -----------------------------------------------------------------------------
 
 // no finger should be curled
@@ -33,8 +33,8 @@ const knownGestures = [
 ]
 
 const gestureStrings = {
-  'scroll-up': '✊',
-  'scroll-down': '🖐️',
+  'scroll-down': '✊',
+  'scroll-up': '🖐️',
 }
 export {
   knownGestures,
