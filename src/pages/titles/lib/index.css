@@ -33,6 +33,19 @@ a {
     text-decoration: none;
 }
 
+#hands {
+    /* width: 100vw; */
+    /* height: 100vh; */
+    /* faz com que elementos possam ser clicaveis */
+    pointer-events: none;
+
+    /* faz ficar em cima dos elementos */
+    position: fixed;
+
+    /* fica à frente dos elementos */
+    z-index: 20;
+}
+
 .content {
     margin: 0;
     padding: 0;
@@ -628,19 +641,19 @@ a {
     background-color: #616161;
 }
 
-.card:hover .overlay, .card.active .overlay{
-    display: flex;
-    background-image: linear-gradient(to right,
-            rgba(51, 51, 51, 0.95),
-            rgba(255, 255, 255, 0.01));
-}
-
-/* .card .overlay {
+/* .card:hover .overlay, .card.active .overlay{
     display: flex;
     background-image: linear-gradient(to right,
             rgba(51, 51, 51, 0.95),
             rgba(255, 255, 255, 0.01));
 } */
+
+.card .overlay {
+    display: flex;
+    background-image: linear-gradient(to right,
+            rgba(51, 51, 51, 0.95),
+            rgba(255, 255, 255, 0.01));
+}
 
 .overlay p {
     color: #bdbdbd;
@@ -1185,17 +1198,4 @@ a {
     .socials svg {
         padding: 0px 10px;
     }
-}
-
-#hands {
-    /* width: 100vw; */
-    /* height: 100vh; */
-    /* faz com que elementos possam ser clicaveis */
-    pointer-events: none;
-
-    /* faz ficar em cima dos elementos */
-    position: fixed;
-
-    /* fica à frente dos elementos */
-    z-index: 2;
 }

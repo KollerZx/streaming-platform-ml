@@ -1,7 +1,11 @@
+const DESLOCAMENTO = 500
+
 export default class HandGestureView {
   #handsCanvas = document.querySelector('#hands')
   #canvasContext = this.#handsCanvas.getContext('2d')
-  constructor() {
+  #fingerLookupIndexes
+  constructor({ fingerLookupIndexes }) {
+    this.#fingerLookupIndexes = fingerLookupIndexes
     this.#handsCanvas.width = window.screen.width
     this.#handsCanvas.height = window.screen.height
   }
@@ -11,24 +15,41 @@ export default class HandGestureView {
   }
 
   drawResults(hands) {
-    // console.log(hands)
     for (const { keypoints, handedness } of hands) {
       if (!keypoints) continue
-
-      this.#canvasContext.fillStyle = handedness === "left" ? "red" : "green"
+      this.#canvasContext.fillStyle = handedness === "Left" ? "red" : "green"
       this.#canvasContext.strokeStyle = "white"
       this.#canvasContext.lineWidth = 8
       this.#canvasContext.lineJoin = "round"
 
       this.#drawJoints(keypoints)
+
+      this.#drawFingersAndHoverElements(keypoints)
     }
+  }
+
+  clickOnElement(x, y) {
+    const element = document.elementFromPoint(x, y)
+    if (!element) return
+
+    const rect = element.getBoundingClientRect()
+    const event = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+      clientX: rect.left + x,
+      clientY: rect.top + y
+    })
+
+    element.dispatchEvent(event)
   }
 
   #drawJoints(keypoints) {
     for (const { x, y } of keypoints) {
+      console.log({ x, y })
       this.#canvasContext.beginPath()
-      const newX = x - 2
-      const newY = y - 2
+      const newX = x
+      const newY = y
       const radius = 3
       const startAngle = 0
       const endAngle = 2 * Math.PI
@@ -37,6 +58,28 @@ export default class HandGestureView {
       this.#canvasContext.fill()
     }
   }
+
+  #drawFingersAndHoverElements(keypoints) {
+    const fingers = Object.keys(this.#fingerLookupIndexes)
+
+    for (const finger of fingers) {
+      const points = this.#fingerLookupIndexes[finger].map(
+        index => keypoints[index]
+      )
+
+      const region = new Path2D()
+      // [0] wrist (palma da mão)
+      const [{ x, y }] = points
+      region.moveTo(x, y)
+
+      for (const point of points) {
+        region.lineTo(point.x, point.y)
+      }
+      this.#canvasContext.stroke(region)
+    }
+
+  }
+
   loop(fn) {
     requestAnimationFrame(fn)
   }
