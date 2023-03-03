@@ -57,6 +57,7 @@ export default class HandGestureService {
   }
 
   async initializeDetector() {
+    // console.log('detector', this.#detector)
     if (this.#detector) return this.#detector
 
     const detectorConfig = {
@@ -72,6 +73,8 @@ export default class HandGestureService {
       this.#handPoseDetection.SupportedModels.MediaPipeHands,
       detectorConfig
     );
+    this.#detector.width = window.screen.width
+    this.#detector.height = window.screen.height
 
     return this.#detector
   }
