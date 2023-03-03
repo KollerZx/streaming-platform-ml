@@ -36,10 +36,11 @@ export default class HandGestureService {
       const result = gestures.reduce(
         (previous, current) => (previous.score > current.score) ? previous : current)
 
+
       // Identifica a coordenada onde se encontra a ponta do dedo indicador na tela
       const { x, y } = hand.keypoints.find(keypoint => keypoint.name === 'index_finger_tip')
 
-      yield { event: result.name, x, y }
+      yield { event: result.name, x, y, handedness: hand.handedness }
       // console.log('detected', this.#gestureStrings[result.name])
     }
 

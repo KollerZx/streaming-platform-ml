@@ -46,10 +46,9 @@ export default class HandGestureView {
 
   #drawJoints(keypoints) {
     for (const { x, y } of keypoints) {
-      console.log({ x, y })
       this.#canvasContext.beginPath()
-      const newX = x
-      const newY = y
+      const newX = x - 2
+      const newY = y - 2
       const radius = 3
       const startAngle = 0
       const endAngle = 2 * Math.PI
